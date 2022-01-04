@@ -11,12 +11,12 @@
       if (smart.hasOwnProperty('patient')) {
         var patient = smart.patient;
         var pt = patient.read();
-        var obv = patient.request("Observation");
-        /* 
+        // var obv = patient.request("Observation");  this is for current version of fhir library (not in this tutorial)
+        
         var obv = smart.patient.api.fetchAll({
                     type: 'Observation'
                   });
-*/
+
         $.when(pt, obv).fail(onError);
 
         $.when(pt, obv).done(function(patient, obv) {
