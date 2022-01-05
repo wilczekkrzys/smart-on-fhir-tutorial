@@ -14,7 +14,14 @@
         // var obv = patient.request("Observation");  this is for current version of fhir library (not in this tutorial)
         
         var obv = smart.patient.api.fetchAll({
-                    type: 'Observation'
+                    type: 'Observation',
+                    query: {
+                      code: {
+                        $or: ['http://loinc.org|72166-2', 'http://loinc.org|8462-4',
+                              'http://loinc.org|8480-6', 'http://loinc.org|2085-9',
+                              'http://loinc.org|2089-1', 'http://loinc.org|55284-4']
+                            }
+                           }
                   });
 
         $.when(pt, obv).fail(onError);
