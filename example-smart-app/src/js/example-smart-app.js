@@ -135,8 +135,8 @@
     $('#hdl').html(p.hdl);
     //var jsonStr = p.observation[0].text();
     //var jsonObj = JSON.parse(jsonStr);
-    //var jsonPretty = JSON.stringify(jsonObj, null, '\t');
-    $('#observation').html(p.observation[0]);
+    var jsonPretty = JSON.stringify(p.observation[0], null, '\t');
+    $('#observation').html(jsonPretty);
   };
 
 })(window);
