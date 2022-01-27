@@ -24,9 +24,13 @@
                            }
                   });
 
-        $.when(pt, obv).fail(onError);
+        var cond = smart.patient.api.fetchAll({
+          type: 'Condition'
+        });
 
-        $.when(pt, obv).done(function(patient, obv) {
+        $.when(pt, obv, cond).fail(onError);
+
+        $.when(pt, obv, cond).done(function(patient, observation, condition) {
           //var byCodes = smart.byCodes(obv, 'code');
           var gender = patient.gender;
 
@@ -65,7 +69,8 @@
           //p.ldl = getQuantityValueAndUnit(ldl[0]);
           p.hdl = '12';
           p.ldl = '100';
-          p.observation = obv;
+          p.observation = observation;
+          p.condition = condition;
           ret.resolve(p);
         });
       } else {
@@ -89,7 +94,8 @@
       diastolicbp: {value: ''},
       ldl: {value: ''},
       hdl: {value: ''},
-      observation: {value: ''}
+      observation: {value: ''},
+      condition: {value: ''}
     };
   }
 
@@ -135,8 +141,10 @@
     $('#hdl').html(p.hdl);
     //var jsonStr = p.observation[0].text();
     //var jsonObj = JSON.parse(jsonStr);
-    var jsonPretty = JSON.stringify(p.observation[0], null, '\t');
+    var jsonPretty = JSON.stringify(p.observation, null, '\t');
     $('#observation').html(jsonPretty);
+    var jsonPretty = JSON.stringify(p.condition, null, '\t');
+    $('#condition').html(jsonPretty);
   };
 
 })(window);
