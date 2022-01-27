@@ -45,7 +45,7 @@
           //var ldl = byCodes('2089-1');
 
           var p = defaultPatient();
-          var o = obv;
+          
           p.birthdate = patient.birthDate;
           p.gender = gender;
           p.fname = fname;
@@ -65,7 +65,8 @@
           //p.ldl = getQuantityValueAndUnit(ldl[0]);
           p.hdl = '12';
           p.ldl = '100';
-          ret.resolve(p, o);
+          p.observation = obv;
+          ret.resolve(p);
         });
       } else {
         onError();
@@ -88,6 +89,7 @@
       diastolicbp: {value: ''},
       ldl: {value: ''},
       hdl: {value: ''},
+      observation: {value: ''}
     };
   }
 
@@ -119,7 +121,7 @@
     }
   }
 
-  window.drawVisualization = function(p, o) {
+  window.drawVisualization = function(p) {
     $('#holder').show();
     $('#loading').hide();
     $('#fname').html(p.fname);
@@ -131,7 +133,7 @@
     $('#diastolicbp').html(p.diastolicbp);
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
-    $('#observation').html(o);
+    $('#observation').html(p.observation);
   };
 
 })(window);
