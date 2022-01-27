@@ -133,7 +133,10 @@
     $('#diastolicbp').html(p.diastolicbp);
     $('#ldl').html(p.ldl);
     $('#hdl').html(p.hdl);
-    $('#observation').html(p.observation);
+    var jsonStr = p.observation[0].text();
+    var jsonObj = JSON.parse(jsonStr);
+    var jsonPretty = JSON.stringify(jsonObj, null, '\t');
+    $('#observation').html(jsonPretty);
   };
 
 })(window);
